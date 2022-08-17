@@ -1,0 +1,28 @@
+{
+  "root": "apps/tick-task-e2e",
+  "sourceRoot": "apps/tick-task-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/tick-task-e2e/cypress.json",
+        "devServerTarget": "tick-task:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "tick-task:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/tick-task-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["tick-task"]
+}
