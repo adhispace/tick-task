@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/breadcrumb",
+  "sourceRoot": "libs/breadcrumb/src",
+  "prefix": "tick-task",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/breadcrumb"],
+      "options": {
+        "jestConfig": "libs/breadcrumb/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/breadcrumb/src/**/*.ts",
+          "libs/breadcrumb/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

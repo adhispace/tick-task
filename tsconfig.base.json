@@ -15,7 +15,12 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@tick-task/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+      "@tick-task/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@tick-task/board": ["libs/board/src/index.ts"],
+      "@tick-task/breadcrumb": ["libs/breadcrumb/src/index.ts"],
+      "@tick-task/header": ["libs/header/src/index.ts"],
+      "@tick-task/home": ["libs/home/src/index.ts"],
+      "@tick-task/project": ["libs/project/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

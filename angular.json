@@ -3,6 +3,11 @@
   "projects": {
     "api": "apps/api",
     "api-interfaces": "libs/api-interfaces",
+    "board": "libs/board",
+    "breadcrumb": "libs/breadcrumb",
+    "header": "libs/header",
+    "home": "libs/home",
+    "project": "libs/project",
     "tick-task": "apps/tick-task",
     "tick-task-e2e": "apps/tick-task-e2e"
   }
