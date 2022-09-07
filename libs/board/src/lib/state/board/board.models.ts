@@ -9,6 +9,7 @@ export interface BoardEntity {
   desc: string;
   groupList: TaskGroup[];
   taskList: Task[];
+  projectId: string;
 }
 
 export interface Task {
@@ -18,7 +19,8 @@ export interface Task {
   created: string;
   priority: string;
   assignee: string;
-  group: string;
+  groupId: string;
+  projectId: string;
   // boardId: string;
   // projectId: string;
 }

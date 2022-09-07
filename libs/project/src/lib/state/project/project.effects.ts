@@ -1,27 +1,25 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { fetch } from '@nrwl/angular';
-import { map } from 'rxjs';
 
-import * as BoardActions from './board.actions';
+import * as ProjectActions from './project.actions';
+import * as ProjectFeature from './project.reducer';
 
 @Injectable()
-export class BoardEffects {
-/*   init$ = createEffect(() =>
+export class ProjectEffects {
+  /* init$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(BoardActions.init),
-      map(action => BoardActions.loadBoardSuccess({ board: [] }))
+      ofType(ProjectActions.init),
       fetch({
         run: (action) => {
           // Your custom service 'load' logic goes here. For now just return a success action...
-          return BoardActions.loadBoardSuccess({ board: [] });
+          return ProjectActions.loadProjectSuccess({ project: [] });
         },
         onError: (action, error) => {
           console.error('Error', error);
-          return BoardActions.loadBoardFailure({ error });
+          return ProjectActions.loadProjectFailure({ error });
         },
-      }
-      )
+      })
     )
   ); */
 

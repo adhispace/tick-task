@@ -40,8 +40,8 @@ describe('Board Selectors', () => {
       expect(selId).toBe('PRODUCT-BBB');
     });
 
-    it('getSelected() should return the selected Entity', () => {
-      const result = BoardSelectors.getSelected(state) as BoardEntity;
+    it('getSelectedBoard() should return the selected Entity', () => {
+      const result = BoardSelectors.getSelectedBoard(state) as BoardEntity;
       const selId = getBoardId(result);
 
       expect(selId).toBe('PRODUCT-BBB');

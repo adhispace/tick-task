@@ -13,10 +13,10 @@
         >
           <div
             class="bg-white cursor-move"
-            *ngFor="let task of taskList$ | async as taskList"
+            *ngFor="let task of taskList$ | async"
             cdkDrag
           >
-            <div class="h-36 w-48 rounded-lg shadow-lg relative p-5 mb-3" *ngIf="task.group === taskGroup.id">
+            <div class="h-36 w-48 rounded-lg shadow-lg relative p-5 mb-3" *ngIf="task.groupId === taskGroup.id">
               <p>{{ task.title }}</p>
               <div>{{ task.desc }}</div>
               <div class="flex flex-row justify-between mt-10">

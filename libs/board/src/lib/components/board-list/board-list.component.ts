@@ -29,6 +29,12 @@ export class BoardListComponent implements OnInit {
     this.initCreateBoardForm();
     this.store.dispatch(init());
     this.boardList$ = this.store.select(getAllBoard);
+    /* this.store.select(getSelectedProject).subscribe(project => {
+      this.createBoardForm.patchValue({
+        ...this.createBoardForm.value,
+        projectId: project?.id
+      })
+    }) */
   }
 
   initCreateBoardForm() {
@@ -36,7 +42,8 @@ export class BoardListComponent implements OnInit {
       name: ['', [Validators.required, Validators.maxLength(15), Validators.minLength(3)]],
       desc: ['', [Validators.required, Validators.maxLength(150), Validators.minLength(3)]],
       groupList: [getDefaultGroupList()],
-      taskList: [[]]
+      taskList: [[]],
+      projectId: [[]]
     })
   }
 

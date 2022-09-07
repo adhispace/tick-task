@@ -30,8 +30,18 @@ export const getSelectedId = createSelector(
   (state: State) => state.selectedId ?? ''
 );
 
-export const getSelected = createSelector(
+export const getSelectedBoard = createSelector(
   getBoardEntities,
   getSelectedId,
   (entities, selectedId) => (selectedId ? entities[selectedId] : null)
 );
+
+export const getTaskListFromBoard = createSelector(
+  getSelectedBoard,
+  (selectedBoard) => selectedBoard?.taskList
+)
+
+export const getGroupListFromBoard = createSelector(
+  getSelectedBoard,
+  (selectedBoard) => selectedBoard?.groupList
+)

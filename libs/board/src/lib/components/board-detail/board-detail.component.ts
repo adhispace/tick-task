@@ -1,13 +1,12 @@
-import { getSelectedId } from './../../state/board/board.selectors';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import * as cuid from 'cuid';
-import { map, Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { createTask } from '../../state/board/board.actions';
-import { getSelected } from '../../state/board/board.selectors';
 import { getTaskPriority, Task, TaskGroup } from './../../state/board/board.models';
+import { getGroupListFromBoard, getTaskListFromBoard } from './../../state/board/board.selectors';
 
 @Component({
   selector: 'tick-task-board-detail',
@@ -29,9 +28,8 @@ export class BoardDetailComponent implements OnInit {
 
   ngOnInit(): void {
       this.initCreateTaskForm();
-      this.taskGroupList$ = this.store.select(getSelected).pipe(map(board => board?.groupList))
-      this.taskList$ = this.store.select(getSelected)
-        .pipe(map((board: any) => board?.taskList), tap((taskList: Task[]) => this.taskList = taskList))
+      this.taskGroupList$ = this.store.select(getGroupListFromBoard);
+      this.taskList$ = this.store.select(getTaskListFromBoard);
   }
 
   initCreateTaskForm() {
@@ -39,7 +37,7 @@ export class BoardDetailComponent implements OnInit {
       title: ['', [Validators.required, Validators.maxLength(15), Validators.minLength(3)]],
       desc: ['', [Validators.required, Validators.maxLength(150), Validators.minLength(3)]],
       priority: ['High', [Validators.required]],
-      group: ['', [Validators.required]]
+      groupId: ['', [Validators.required]]
     })
   }
 
@@ -64,7 +62,7 @@ export class BoardDetailComponent implements OnInit {
     this.showModal = true;
     this.createTaskForm.patchValue({
       ...this.createTaskForm.value,
-      group: taskGroup.id
+      groupId: taskGroup.id
     });
   }
 
