@@ -33,7 +33,7 @@ export const selectBoard = createAction(
 
 export const createTask = createAction(
   '[Board/API] Create task in the board',
-  props<{taskList: Task[]}>()
+  props<{newTask: Task}>()
 )
 
 export const updateProjectId = createAction(

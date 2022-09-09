@@ -44,11 +44,11 @@ const boardReducer = createReducer(
     }
     return boardAdapter.addOne(newBoard, {...state, selectedId: newBoard.id});
   }),
-  on(BoardActions.createTask, (state, {taskList}) => {
-    const currBoard = state.entities[state.selectedId];
+  on(BoardActions.createTask, (state, {newTask}) => {
+    const currBoard: any = state.entities[state.selectedId];
     return boardAdapter.updateOne({id: state.selectedId, changes: {
       ...currBoard,
-      taskList
+      taskList: [...currBoard.taskList, newTask]
     }}, state)
   })
 );

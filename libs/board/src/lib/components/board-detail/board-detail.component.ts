@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import * as cuid from 'cuid';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { createTask } from '../../state/board/board.actions';
 import { getTaskPriority, Task, TaskGroup } from './../../state/board/board.models';
 import { getGroupListFromBoard, getTaskListFromBoard } from './../../state/board/board.selectors';
@@ -16,7 +16,6 @@ import { getGroupListFromBoard, getTaskListFromBoard } from './../../state/board
 export class BoardDetailComponent implements OnInit {
 
   taskList$!: Observable<Task[] | any>;
-  taskList!: Task[];
   taskGroupList$!: Observable<TaskGroup[] |  undefined>;
   priorities!: string[];
   createTaskForm!: FormGroup;  
@@ -74,7 +73,6 @@ export class BoardDetailComponent implements OnInit {
       created: new Date().toDateString(),
       assignee: ''
     }
-
-    this.store.dispatch(createTask({taskList: [...this.taskList, newTask]}));
+    this.store.dispatch(createTask({newTask}));
   }
 }
