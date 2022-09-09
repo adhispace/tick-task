@@ -34,7 +34,6 @@ export class ProjectListComponent implements OnInit {
     this.createProjectForm = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(15), Validators.minLength(3)]],
       desc: ['', [Validators.required, Validators.maxLength(150), Validators.minLength(3)]],
-      boardList: [[]]
     })
   }
 
@@ -45,6 +44,6 @@ export class ProjectListComponent implements OnInit {
 
   getProjectDetail(project: ProjectEntity) {
     this.store.dispatch(selectProject({projectId: project.id}));
-    this.router.navigateByUrl('/board');
+    this.router.navigate(['/board', project.id]);
   }
 }

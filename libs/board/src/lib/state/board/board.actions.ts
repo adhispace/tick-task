@@ -35,3 +35,8 @@ export const createTask = createAction(
   '[Board/API] Create task in the board',
   props<{taskList: Task[]}>()
 )
+
+export const updateProjectId = createAction(
+  '[Board/API] Update project Id',
+  props<{projectId: string}>()
+)

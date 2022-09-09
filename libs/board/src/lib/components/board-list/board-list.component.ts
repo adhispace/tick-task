@@ -1,11 +1,11 @@
-import { ActivatedRoute, Router } from '@angular/router';
+import { getAllBoard } from './../../state/board/board.selectors';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { map, Observable } from 'rxjs';
+import { createBoard, init, selectBoard, updateProjectId } from '../../state/board/board.actions';
 import { BoardEntity, getDefaultGroupList } from '../../state/board/board.models';
-import { createBoard, init, selectBoard } from '../../state/board/board.actions';
-import { getAllBoard } from '../../state/board/board.selectors';
-import { Observable, tap } from 'rxjs';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'tick-task-board-list',
@@ -18,6 +18,10 @@ export class BoardListComponent implements OnInit {
   createBoardForm!: FormGroup;  
   showModal = false;
 
+  private get projectId() {
+    return this.route.snapshot.params['id'] ?? null;
+  }
+
   constructor(
     private store: Store,
     private fb: FormBuilder,
@@ -27,14 +31,11 @@ export class BoardListComponent implements OnInit {
 
   ngOnInit(): void {
     this.initCreateBoardForm();
+    this.store.dispatch(updateProjectId({projectId: this.projectId}));
     this.store.dispatch(init());
-    this.boardList$ = this.store.select(getAllBoard);
-    /* this.store.select(getSelectedProject).subscribe(project => {
-      this.createBoardForm.patchValue({
-        ...this.createBoardForm.value,
-        projectId: project?.id
-      })
-    }) */
+    this.boardList$ = this.store.select(getAllBoard).pipe(map(boards => {
+      return boards.filter(board => board.projectId === this.projectId)
+    }));
   }
 
   initCreateBoardForm() {
@@ -43,12 +44,16 @@ export class BoardListComponent implements OnInit {
       desc: ['', [Validators.required, Validators.maxLength(150), Validators.minLength(3)]],
       groupList: [getDefaultGroupList()],
       taskList: [[]],
-      projectId: [[]]
+      projectId: ['', []]
     })
   }
 
   boardFormSubmit() {
     this.showModal = false;
+    this.createBoardForm.patchValue({
+      ...this.createBoardForm.value,
+      projectId: this.projectId
+    });
     this.store.dispatch(createBoard({board: this.createBoardForm.value}));
   }
 

@@ -8,9 +8,9 @@ import { BoardEntity } from './board.models';
 export const BOARD_FEATURE_KEY = 'board';
 
 export interface State extends EntityState<BoardEntity> {
-  selectedId: string; // which Board record has been selected
-  loaded: boolean; // has the Board list been loaded
-  error?: string | null; // last known error (if any)
+  selectedId: string; 
+  loaded: boolean;
+  error?: string | null;
 }
 
 export interface BoardPartialState {
@@ -39,7 +39,8 @@ const boardReducer = createReducer(
       name: board.name,
       desc: board.desc,
       groupList: board.groupList,
-      taskList: board.taskList
+      taskList: board.taskList,
+      projectId: board.projectId
     }
     return boardAdapter.addOne(newBoard, {...state, selectedId: newBoard.id});
   }),

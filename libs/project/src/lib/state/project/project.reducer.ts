@@ -44,8 +44,7 @@ const projectReducer = createReducer(
     const newProject: ProjectEntity = {
       id: cuid(),
       name: project.name,
-      desc: project.desc,
-      boardList: []
+      desc: project.desc
     }
     return projectAdapter.addOne(newProject, {...state, selectedId: newProject.id});
   }),
